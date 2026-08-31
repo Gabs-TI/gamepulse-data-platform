@@ -216,3 +216,22 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# ============================================
+# GamePulse - Local data
+# ============================================
+
+# Raw data collected from external sources
+data/raw/*
+
+# Processed/transformed data
+data/processed/*
+
+# Records rejected by data quality rules
+data/quarantine/*
+
+# Keep directory structure in Git
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/quarantine/.gitkeep
