@@ -1,6 +1,8 @@
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from gamepulse.quality.current_players import validate_current_players_snapshot
+from gamepulse.quality.quarantine import save_quarantined_snapshot
 
 import requests
 
@@ -63,3 +65,13 @@ if __name__ == "__main__":
     output_path = save_raw_snapshot(snapshot)
 
     print(f"Raw snapshot saved to: {output_path}")
+
+    errors = validate_current_players_snapshot(snapshot)
+
+    if errors:
+        quarantine_path = save_quarantined_snapshot(snapshot, errors)
+
+        print(f"Data quality failed: {errors}")
+        print(f"Snapshot quarantined at: {quarantine_path}")
+    else:
+        print("Data quality validation passed.")
