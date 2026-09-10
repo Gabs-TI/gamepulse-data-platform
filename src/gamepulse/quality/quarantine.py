@@ -2,12 +2,15 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-def save_quarantined_snapshot(snapshot: dict, errors: list[str]) -> Path:
+def save_quarantined_snapshot(
+    snapshot: dict,
+    errors: list[str],
+    base_dir: Path = Path("data") / "quarantine",
+) -> Path:
     detected_at = datetime.now(timezone.utc)
-
+    
     output_dir = (
-        Path("data")
-        / "quarantine"
+        base_dir
         / "steam"
         / "current_players"
         / f"{detected_at.year:04d}"
